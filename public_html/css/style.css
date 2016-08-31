@@ -1,0 +1,82 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.farbknopf{
+    cursor: pointer;
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-width: 10px;
+    float: left;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+#hintergrund{
+    background-color: black;
+    width: 600px;
+    height: 600px;
+    position: relative;
+}
+
+#gelb{
+    background-color: #cccc00;
+    border-top-left-radius: 280px;
+}
+
+#rot{
+    background-color: #cc0000;
+    border-bottom-left-radius: 280px;
+}
+
+#blau{
+    background-color: #0000cc;
+    border-top-right-radius: 280px;
+}
+
+#gruen{
+    background-color: #00cc00;
+    border-bottom-right-radius: 280px;
+}
+
+#bedienFeld{
+    position: absolute;
+    left: 155px;
+    top: 155px;
+    width: 250px;
+    height: 250px;
+    background-color: grey;
+    border-radius: 145px;
+    border-width: 20px;
+    border-color: black;
+    border-style: solid;
+}
+
+#bedienFlaeche{
+    position: absolute;
+    background-color: grey;
+    width: 147px;
+    height: 65px;
+    left: 51px;
+    top: 91px;
+}
+
+input{
+    background-color: grey;
+    height: 100%;
+    width: 100%; 
+    text-align: center; 
+    border: none;
+    color: #ffffcc;
+}
+
+button{
+    background-color: #ffffcc;
+    width: 100%; 
+    border-color: black; 
+    border-style: solid; 
+    border-width: 3px;
+}
