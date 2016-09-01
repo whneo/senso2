@@ -5,8 +5,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script src="jq/jquery-ui-1.12.0/jquery-ui.js" type="text/javascript"></script>
         <script src="jq/jquery-3.1.0.min.js" type="text/javascript"></script>
+        <script src="jq/jquery-ui-1.12.0/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/senso.js" type="text/javascript"></script>
         <script>
 
@@ -21,7 +21,7 @@
                 zeigeLevelAn(zahl);
                 zeigeHighscoreAn(highscore);
                 aktiviereStartknopf();
-                
+
 
                 // Objekte erstellen
                 knopfRot = new Farbknopf($('#rot'), '#ff3333');
@@ -60,22 +60,24 @@
             };
 
             var spielSequenzAB = function (sequenz) {
-                switch (sequenz.farben[0]) {
-                    case 'rot':
-                        knopfRot.leuchten();
-                        break;
-                    case 'blau':
-                        knopfBlau.leuchten();
-                        break;
-                    case 'gruen':
-                        knopfGruen.leuchten();
-                        break;
-                    case 'gelb':
-                        knopfGelb.leuchten();
-                        break;
-                    default :
-                        alert('Keine Farbe');
-                }
+                var objName = 'knopf' + sequenz.farben[0].charAt(0).toUpperCase() + sequenz.farben[0].substr(1);
+                window[objName].leuchten();
+//                switch (sequenz.farben[0]) {
+//                    case 'rot':
+//                        knopfRot.leuchten();
+//                        break;
+//                    case 'blau':
+//                        knopfBlau.leuchten();
+//                        break;
+//                    case 'gruen':
+//                        knopfGruen.leuchten();
+//                        break;
+//                    case 'gelb':
+//                        knopfGelb.leuchten();
+//                        break;
+//                    default :
+//                        alert('Keine Farbe');
+//                }
             };
         </script>
     </head>

@@ -41,10 +41,9 @@ Farbknopf.aktiviereClick = function () {
 };
 
 Farbknopf.prototype.leuchten = function () {
-    var standardfarbe = this.obj.css('backgroundColor');
-//    alert(standardfarbe);
-    this.obj.animate({backgroundColor: this.leuchtfarbe}, 500);
-    this.obj.animate({backgroundColor: standardfarbe}, 500);
+    var standardfarbe = this.obj.css('background-color');
+    this.obj.animate({'background-color': this.leuchtfarbe}, 100);
+    this.obj.animate({'background-color': standardfarbe}, 100);
 };
 
 // Groß weil KLasse
