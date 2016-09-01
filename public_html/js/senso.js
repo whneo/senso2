@@ -3,9 +3,11 @@
  */
 
 // Groß geschrieben weil es sich um eine Klasse handelt
-function Farbknopf(obj) {
+function Farbknopf(obj, leuchtfarbe) {
     this.obj = obj;
+    this.leuchtfarbe = leuchtfarbe;
 }
+
 Farbknopf.deaktiviereClick = function () {
     $('.farbknopf').unbind('mousedown');
     $('.farbknopf').unbind('mouseup');
@@ -36,6 +38,13 @@ Farbknopf.aktiviereClick = function () {
     $('#gruen').mouseup(function () {
         $(this).css('background-color', '#00cc00');
     });
+};
+
+Farbknopf.prototype.leuchten = function () {
+    var standardfarbe = this.obj.css('backgroundColor');
+//    alert(standardfarbe);
+    this.obj.animate({backgroundColor: this.leuchtfarbe}, 500);
+    this.obj.animate({backgroundColor: standardfarbe}, 500);
 };
 
 // Groß weil KLasse

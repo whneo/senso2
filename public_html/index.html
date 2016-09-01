@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Senso</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
+        <script src="jq/jquery-ui-1.12.0/jquery-ui.js" type="text/javascript"></script>
         <script src="jq/jquery-3.1.0.min.js" type="text/javascript"></script>
         <script src="js/senso.js" type="text/javascript"></script>
         <script>
-            
+
             // Variablen für die Farbknöpfe
             var knopfRot;
             var knopfGelb;
             var knopfGruen;
             var knopfBlau;
-            
+
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
                 zeigeLevelAn(zahl);
                 zeigeHighscoreAn(highscore);
                 aktiviereStartknopf();
                 
+
                 // Objekte erstellen
-                knopfRot = new Farbknopf($('#rot'));
-                knopfGelb = new Farbknopf($('#gelb'));
-                knopfGruen = new Farbknopf($('#gruen'));
-                knopfBlau = new Farbknopf($('#blau'));
+                knopfRot = new Farbknopf($('#rot'), '#ff3333');
+                knopfGelb = new Farbknopf($('#gelb'), '#ffff00');
+                knopfGruen = new Farbknopf($('#gruen'), '#00ff00');
+                knopfBlau = new Farbknopf($('#blau'), '#0066ff');
             });
-            
-            
+
+
             //  Zeige Level Funktion
-            var zahl = 33;
+            var zahl = 34;
             var zeigeLevelAn = function (level) {
                 $('#level').val(level);
             };
 
 
             //  Zeige Highscore Funktion
-            var highscore = "Marco 20";
+            var highscore = "Rainer 21";
             var zeigeHighscoreAn = function (htext) {
                 $('#highscore').val(htext);
             };
@@ -54,14 +56,27 @@
             var loeseStartaus = function () {
                 var sq = new Spielsequenz();
                 Farbknopf.deaktiviereClick();
-                spielSequenzAB();
+                spielSequenzAB(sq);
             };
 
-            var spielSequenzAB = function (){
-                
-            }
-            
-
+            var spielSequenzAB = function (sequenz) {
+                switch (sequenz.farben[0]) {
+                    case 'rot':
+                        knopfRot.leuchten();
+                        break;
+                    case 'blau':
+                        knopfBlau.leuchten();
+                        break;
+                    case 'gruen':
+                        knopfGruen.leuchten();
+                        break;
+                    case 'gelb':
+                        knopfGelb.leuchten();
+                        break;
+                    default :
+                        alert('Keine Farbe');
+                }
+            };
         </script>
     </head>
     <body>
@@ -73,9 +88,9 @@
             <div id="bedienFeld">
                 <div id="bedienFlaeche">
 
-                    <input class="unSelectable" id="level" type="text" value="1" readonly="" />
+                    <input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/>
                     <button id="start">Start</button>
-                    <input class="unSelectable" id="highscore" type="text" value="Spieler: Highscore" readonly=""/>
+                    <input class="unSelectable" id="highscore" type="text" value="Spieler: Highscore" readonly="" disabled="disabled"/>
 
                 </div>
             </div>
