@@ -61,7 +61,7 @@ body{
     width: 147px;
     height: 65px;
     left: 51px;
-    top: 91px;
+    top: 45px;
 }
 
 input{
@@ -79,4 +79,5 @@ button{
     border-color: black; 
     border-style: solid; 
     border-width: 3px;
+    cursor: pointer;
 }

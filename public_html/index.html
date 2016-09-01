@@ -10,7 +10,21 @@
         <script>
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
-            })
+                
+                var zahl = 33;
+                var zeigeLevelAn = function (level) {
+                    $('#level').val(level);
+                }
+                zeigeLevelAn(zahl);
+
+                var aktiviereStartknopf = function () {
+                    $('#start').click(function () {
+                        alert('');
+                    });
+                };
+                aktiviereStartknopf();
+            });
+
         </script>
     </head>
     <body>
@@ -21,11 +35,11 @@
             <div id="gruen" class="farbknopf"></div>
             <div id="bedienFeld">
                 <div id="bedienFlaeche">
-                    <form>
-                        <input id="level" type="text" value="1" readonly=""/>
-                        <button id="start">Start</button>
-                        <input id="highscore" type="text" value="Spieler: Highscore" readonly=""/>
-                    </form>
+
+                    <input id="level" type="text" value="1" readonly=""/>
+                    <button id="start">Start</button>
+                    <input id="highscore" type="text" value="Spieler: Highscore" readonly=""/>
+
                 </div>
             </div>
         </div>
