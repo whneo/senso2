@@ -2,6 +2,7 @@
  * @todo Parameter für Konstruktor nötig?
  */
 
+// Groß geschrieben weil es sich um eine Klasse handelt
 function Farbknopf(obj) {
     this.obj = obj;
 }
@@ -35,4 +36,20 @@ Farbknopf.aktiviereClick = function () {
     $('#gruen').mouseup(function () {
         $(this).css('background-color', '#00cc00');
     });
+};
+
+// Groß weil KLasse
+var Spielsequenz = function () {
+    this.farben = Spielsequenz.erstelleArray64Random();
+};
+
+//Methode Sequenz erstellen
+Spielsequenz.erstelleArray64Random = function () {
+    var farben = [];
+    var grundFarben = ['rot', 'gelb', 'gruen', 'blau'];
+    for (var i = 0; i < 64; i++) {
+        var zahl = Math.floor(Math.random() * 4);
+        farben.push(grundFarben[zahl]);
+    }
+    return farben;
 };

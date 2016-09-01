@@ -71,7 +71,18 @@ input{
     text-align: center; 
     border: none;
     color: #ffffcc;
+    cursor: default;
+    
 }
+
+.unSelectable{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;  
+}
+
+
 
 button{
     background-color: #ffffcc;
@@ -80,4 +91,5 @@ button{
     border-style: solid; 
     border-width: 3px;
     cursor: pointer;
+    
 }
