@@ -63,7 +63,27 @@ body{
     top: 45px;
 }
 
-input{
+#highscoreEingabe{
+    position: absolute;
+    background-color: grey;
+    width: 147px;
+    height: 65px;
+    left: 51px;
+    top: 95px;
+}
+
+#username{
+    background-color: white;
+    height: 25%;
+    width: 98%; 
+    text-align: center; 
+    border: none;
+    color: black;
+    cursor: default;
+    float: right;
+}
+
+input, span{
     background-color: grey;
     height: 100%;
     width: 100%; 
@@ -71,7 +91,7 @@ input{
     border: none;
     color: #ffffcc;
     cursor: default;
-    
+    font-family: sans-serif;
 }
 
 .unSelectable{
