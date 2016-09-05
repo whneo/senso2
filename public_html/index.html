@@ -64,7 +64,6 @@
             //  Starte Spiel
             var loeseStartaus = function () {
                 sq = new Spielsequenz();
-                aktuellerIndex = 0;
                 Farbknopf.deaktiviereClick();
                 deaktiviereStartknopf();
                 spielSequenzAb(sq, 0, level);
@@ -82,7 +81,7 @@
 
             var starteSpielereingabe = function () {
                 Farbknopf.aktiviereClick();
-                timer = window.setTimeout(spielEnde, 3600);
+                timer = window.setTimeout(spielEnde, 3650);
             };
 
             var spielEnde = function () {
@@ -105,11 +104,9 @@
             <div id="gruen" class="farbknopf"></div>
             <div id="bedienFeld">
                 <div id="bedienFlaeche">
-
                     <input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/>
                     <button id="start">Start</button>
                     <input class="unSelectable" id="highscore" type="text" value="Spieler: Highscore" readonly="" disabled="disabled"/>
-
                 </div>
             </div>
         </div>

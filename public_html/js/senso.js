@@ -9,57 +9,18 @@ function Farbknopf(obj, leuchtfarbe) {
 }
 
 Farbknopf.deaktiviereClick = function () {
-//    $('.farbknopf').unbind('mousedown');
-//    $('.farbknopf').unbind('mouseup');
     $('.farbknopf').unbind('click');
     $('.farbknopf').css('cursor', 'default');
 };
 
 Farbknopf.aktiviereClick = function () {
     $('.farbknopf').css('cursor', 'pointer');
-//    $('#gelb').mousedown(function () {
-//        $(this).css('background-color', '#ffff00');
-//    });
-//    $('#gelb').mouseup(function () {
-//        $(this).css('background-color', '#cccc00');
-//        pruefeUserreaktion();
-//    });
-    $('#gelb').click(function () {
-        Farbknopf.leuchten2(this);
-    });
-//    $('#rot').mousedown(function () {
-//        $(this).css('background-color', '#ff3333');
-//    });
-//    $('#rot').mouseup(function () {
-//        $(this).css('background-color', '#cc0000');
-//        pruefeUserreaktion();
-//    });
-    $('#rot').click(function () {
-        Farbknopf.leuchten2(this);
-    });
-//    $('#blau').mousedown(function () {
-//        $(this).css('background-color', '#0066ff');
-//    });
-//    $('#blau').mouseup(function () {
-//        $(this).css('background-color', '#0000cc');
-//        pruefeUserreaktion();
-//    });
-    $('#blau').click(function () {
-        Farbknopf.leuchten2(this);
-    });
-//    $('#gruen').mousedown(function () {
-//        $(this).css('background-color', '#00ff00');
-//    });
-//    $('#gruen').mouseup(function () {
-//        $(this).css('background-color', '#00cc00');
-//        pruefeUserreaktion();
-//    });
-    $('#gruen').click(function () {
-        Farbknopf.leuchten2(this);
+    $('.farbknopf').click(function () {
+        Farbknopf.leuchtenOnclick(this);
     });
 };
 
-Farbknopf.leuchten2 = function (obj) {
+Farbknopf.leuchtenOnclick = function (obj) {
     Farbknopf.deaktiviereClick();
     var id = '#' + obj.id;
     var farbknopf = 'knopf' + id.charAt(1).toUpperCase() + id.substring(2, id.length);
@@ -67,7 +28,7 @@ Farbknopf.leuchten2 = function (obj) {
     $(id).animate({'background-color': window[farbknopf].leuchtfarbe}, 100);
     $(id).animate({'background-color': window[farbknopf].leuchtfarbe}, 150);
     $(id).animate({'background-color': standardfarbe}, 100);
-    $(id).animate({'background-color': standardfarbe}, 300, function (){
+    $(id).animate({'background-color': standardfarbe}, 1, function (){
         pruefeUserreaktion(window[farbknopf]);
     });
 };
