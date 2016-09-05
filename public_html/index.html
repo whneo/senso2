@@ -10,13 +10,14 @@
         <script src="js/senso.js" type="text/javascript"></script>
         <script>
             // Variablen für die Farbknöpfe
-            var level = 2;
+            var level = 1;
             var knopfRot;
             var knopfGelb;
             var knopfGruen;
             var knopfBlau;
             var timer;
             var sq;
+            var aktuellerIndex = 0;
 
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
@@ -64,6 +65,7 @@
             //  Starte Spiel
             var loeseStartaus = function () {
                 sq = new Spielsequenz();
+                aktuellerIndex = 0;
                 Farbknopf.deaktiviereClick();
                 deaktiviereStartknopf();
                 spielSequenzAb(sq, 0, level);
@@ -90,9 +92,25 @@
                 Farbknopf.deaktiviereClick();
             };
 
-            var pruefeUserreaktion = function (button) {
+            var pruefeUserreaktion = function (farbknopf) {
                 clearTimeout(timer);
-                Farbknopf.aktiviereClick();
+                if (farbknopf.obj === sq.farben[aktuellerIndex].obj) {
+                    if (aktuellerIndex < level - 1) {
+                        aktuellerIndex++;
+                        starteSpielereingabe();
+                    } else {
+                        if (level === sq.farben.length) {
+                            alert('Yeahhh');
+                        } else {
+                            level++;
+                            aktuellerIndex = 0;
+                            window.setTimeout(function (){spielSequenzAb(sq, 0 , level);}, 1000);
+                        }
+                    }
+                } else {
+                    alert('daneben');
+                    spielEnde();
+                }
             };
         </script>
     </head>

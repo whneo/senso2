@@ -41,7 +41,7 @@ Farbknopf.prototype.leuchten = function (next) {
     this.obj.animate({'background-color': standardfarbe}, 300, next);
 };
 
-// Groß weil KLasse
+// Groß weil Klasse
 var Spielsequenz = function () {
     this.farben = Spielsequenz.erstelleArray64Random();
 };
