@@ -18,15 +18,14 @@
             var timer;
             var sq;
             var aktuellerIndex;
-            var highscore = 0;
-            var spielername;
+            var highscore = 1;
+            var spielername = 'Marco';
 
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
                 zeigeLevelAn(level);
                 zeigeHighscoreNameAn(spielername + ': ' + highscore);
                 aktiviereStartknopf();
-
 
                 // Objekte erstellen
                 knopfRot = new Farbknopf($('#rot'), '#ff3333');
@@ -88,16 +87,21 @@
                 timer = window.setTimeout(spielEnde, 3650);
             };
 
+            // !!! bei lv 64 ist es egal ob man es besteht oder nicht !!!
             var spielEnde = function () {
-                if (highscore < level) {
-                    switchAnzeigefeld();
-                }
-                aktiviereStartknopf();
                 Farbknopf.deaktiviereClick();
+                if (highscore < level - 1) {
+                    switchAnzeigefeld();
+                    highscore = level - 1;
+                    $("#submitname").click(function () {
+                        spielername = $("#username").val();
+                        speichereErgebnis();
+                    });
+                }
             };
 
             var switchAnzeigefeld = function () {
-
+                $('#bedienFeld').html('<div id="highscoreEingabe"><span>Name:</span> <input id="username" type="text" required="" value=""/><button id="submitname">Yeah!</button></div>');
             };
 
             var pruefeUserreaktion = function (farbknopf) {
@@ -119,12 +123,18 @@
                         }
                     }
                 } else {
-                    alert('daneben');
+                    alert('verloren');
                     spielEnde();
                 }
             };
 
-
+            var speichereErgebnis = function () {
+                $('#bedienFeld').html('<div id="bedienFlaeche"><input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/><button id="start">Start</button><input class="unSelectable" id="highscore" type="text" value="" readonly="" disabled="disabled"/></div>');
+                zeigeHighscoreNameAn(spielername + ': ' + highscore);
+                level = '';
+                zeigeLevelAn(level);
+                aktiviereStartknopf();
+            };
         </script>
     </head>
     <body>
@@ -134,14 +144,10 @@
             <div id="rot" class="farbknopf"></div>
             <div id="gruen" class="farbknopf"></div>
             <div id="bedienFeld">
-                <!--                <div id="bedienFlaeche">
-                                    <input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/>
-                                    <button id="start">Start</button>
-                                    <input class="unSelectable" id="highscore" type="text" value="Spieler: Highscore" readonly="" disabled="disabled"/>
-                                </div>-->
-                <div id="highscoreEingabe">
-                    <span>Name:</span> <input id="username" type="text" required="" value=""/>
-                    <button id="submitname">Yeah!</button>
+                <div id="bedienFlaeche">
+                    <input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/>
+                    <button id="start">Start</button>
+                    <input class="unSelectable" id="highscore" type="text" value="Spieler: Highscore" readonly="" disabled="disabled"/>
                 </div>
             </div>
         </div>
