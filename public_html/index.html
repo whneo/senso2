@@ -10,11 +10,13 @@
         <script src="js/senso.js" type="text/javascript"></script>
         <script>
             // Variablen für die Farbknöpfe
-            var level = 10;
+            var level = 2;
             var knopfRot;
             var knopfGelb;
             var knopfGruen;
             var knopfBlau;
+            var timer;
+            var sq;
 
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
@@ -32,7 +34,7 @@
 
 
             //  Zeige Level Funktion
-            var zahl = 34;
+            var zahl = 1;
             var zeigeLevelAn = function (level) {
                 $('#level').val(level);
             };
@@ -46,27 +48,52 @@
 
             //  Aktiviere Startknopf
             var aktiviereStartknopf = function () {
+                $('#start').css('cursor', 'pointer');
                 $('#start').click(function () {
                     loeseStartaus();
                 });
             };
 
+            // Deaktiviere Startknopf
+            var deaktiviereStartknopf = function () {
+                $('#start').unbind('click');
+                $('#start').css('cursor', 'default');
+            };
+
 
             //  Starte Spiel
             var loeseStartaus = function () {
-                var sq = new Spielsequenz();
+                sq = new Spielsequenz();
+                aktuellerIndex = 0;
                 Farbknopf.deaktiviereClick();
+                deaktiviereStartknopf();
                 spielSequenzAb(sq, 0, level);
             };
 
             var spielSequenzAb = function (sequenz, von, level) {
-                if (von < level) {
+                if (von < level - 1) {
                     sequenz.farben[von].leuchten(function () {
                         spielSequenzAb(sequenz, von + 1, level);
                     });
                 } else {
-                    sequenz.farben[von].leuchten(Farbknopf.aktiviereClick());
+                    sequenz.farben[von].leuchten(starteSpielereingabe);
                 }
+            };
+
+            var starteSpielereingabe = function () {
+                Farbknopf.aktiviereClick();
+                timer = window.setTimeout(spielEnde, 3600);
+            };
+
+            var spielEnde = function () {
+                alert('verloren');
+                aktiviereStartknopf();
+                Farbknopf.deaktiviereClick();
+            };
+
+            var pruefeUserreaktion = function (button) {
+                clearTimeout(timer);
+                Farbknopf.aktiviereClick();
             };
         </script>
     </head>
