@@ -1,8 +1,3 @@
-/*
- * @todo Parameter für Konstruktor nötig?
- */
-
-// Groß geschrieben weil es sich um eine Klasse handelt
 function Farbknopf(obj, leuchtfarbe) {
     this.obj = obj;
     this.leuchtfarbe = leuchtfarbe;
@@ -41,12 +36,10 @@ Farbknopf.prototype.leuchten = function (next) {
     this.obj.animate({'background-color': standardfarbe}, 300, next);
 };
 
-// Groß weil Klasse
 var Spielsequenz = function () {
     this.farben = Spielsequenz.erstelleArray64Random();
 };
 
-//Methode Sequenz erstellen
 Spielsequenz.erstelleArray64Random = function () {
     var farben = [];
     var farbknoepfe = [knopfRot, knopfGelb, knopfGruen, knopfBlau];

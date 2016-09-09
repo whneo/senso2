@@ -20,8 +20,22 @@
             var aktuellerIndex;
             var highscore = 1;
             var spielername = 'Marco';
+            var db;
 
             $(document).ready(function () {
+                var request = indexedDB.open("SensoDatenbank1");
+                request.onerror = function (event) {
+                    alert("DB nicht erreichbar");
+                };
+                request.onsuccess = function (event) {
+                    db = event.target.result;
+                    laden();
+                };
+                request.onupgradeneeded = function (event) {
+                    db = event.target.result;
+                    db.createObjectStore("highscore", {keyPath: "id"});
+                };
+
                 Farbknopf.deaktiviereClick();
                 zeigeLevelAn(level);
                 zeigeHighscoreNameAn(spielername + ': ' + highscore);
@@ -95,9 +109,11 @@
                     highscore = level - 1;
                     $("#submitname").click(function () {
                         spielername = $("#username").val();
-                        speichereErgebnis();
+                        speichern();
+                        reset();
                     });
                 }
+                
             };
 
             var switchAnzeigefeld = function () {
@@ -128,12 +144,56 @@
                 }
             };
 
-            var speichereErgebnis = function () {
+            var reset = function () {
                 $('#bedienFeld').html('<div id="bedienFlaeche"><input class="unSelectable" id="level" type="text" value="1" readonly="" disabled="disabled"/><button id="start">Start</button><input class="unSelectable" id="highscore" type="text" value="" readonly="" disabled="disabled"/></div>');
+                laden();
                 zeigeHighscoreNameAn(spielername + ': ' + highscore);
                 level = '';
                 zeigeLevelAn(level);
                 aktiviereStartknopf();
+            };
+
+            var getObjectStore = function (modus) {
+                // modus: "readwrite" oder "readonly"
+                var transaction = db.transaction(["highscore"], modus);
+                return transaction.objectStore("highscore");
+            };
+
+            var speichereInDB = function (highscoreObj) {
+                var objStore = getObjectStore("readwrite");
+                var anfrage = objStore.put(highscoreObj);
+                anfrage.onsuccess = function (event) {
+                    alert("Speichern erfolgreich!");
+                };
+                anfrage.onerror = function (event) {
+                    alert("Speichern fehlgeschlagen!");
+                };
+            };
+
+            var speichern = function () {
+                var highscoreObj = {};
+                highscoreObj.id = 1;
+                highscoreObj.spieler = spielername;
+                highscoreObj.punkte = highscore;
+                speichereInDB(highscoreObj);
+            };
+
+            var ladeAusDB = function (key) {
+                var objStore = getObjectStore("readonly");
+                var anfrage = objStore.get(key);
+                anfrage.onsuccess = function (event) {
+                    var highscoreObj = this.result;
+                    spielername = highscoreObj.spieler;
+                    highscore = highscoreObj.punkte;
+                    zeigeHighscoreNameAn(spielername + ': ' + highscore);
+                };
+                anfrage.onerror = function (event) {
+                    alert("Datensatz nicht vorhanden!");
+                };
+            };
+
+            var laden = function () {
+                ladeAusDB(1);
             };
         </script>
     </head>
